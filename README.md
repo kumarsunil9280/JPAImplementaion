@@ -5,15 +5,15 @@ JPA and Docker
 docker command
 
 ## Docker Version & System
-docker --version            # Docker version
-docker version              # Client + server version
-docker info                # Docker system info
+docker --version            ### Docker version
+docker version              ### Client + server version
+docker info                 ### Docker system info
 
 
-#Docker Images
-docker search imageName  # search docker image in docker hub
-docker images              # List images
-docker image ls            # Same as above
+## Docker Images
+docker search imageName    ### search docker image in docker hub
+docker images              ### List images
+docker image ls            ### Same as above
 docker pull nginx          # Download image
 docker build -t app .      # Build image from Dockerfile
 docker tag app app:v1      # Tag image
