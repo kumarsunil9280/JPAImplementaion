@@ -19,7 +19,7 @@ import com.example.docker.entity.Users;
 public class UserService {
 	@Autowired
 	UserDao userDao;
-	
+
 	@Autowired
     UserRepository userRepository ;
 
@@ -55,12 +55,12 @@ public class UserService {
 		            return user;
 		        })
 		        .toList();
-		
+
 		List<Long> userId = userDao.saveBulkUser(userList);
-		
+
 		var respDTOList = new ArrayList<ResponseDTO>();
-		
-		
+
+
 		if (userId.size()>0) {
 			for(Long id:userId){
 				ResponseDTO dto = new ResponseDTO();
@@ -68,7 +68,7 @@ public class UserService {
 				dto.setMsg("Successfully Saved!");
 				respDTOList.add(dto);
 			}
-			
+
 		} else {
 			ResponseDTO dto = new ResponseDTO();
 			dto.setId(null);
@@ -84,7 +84,7 @@ public class UserService {
 	            Sort.Order.asc("id")
 	        ));
 	}
-	
+
 	 @Cacheable(value = "users", key = "#id")
 	public Optional<Users> getUserById(Long id) {
 		return userRepository.findById(id);

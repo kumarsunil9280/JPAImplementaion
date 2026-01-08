@@ -16,7 +16,6 @@ public class HomeController {
         return new ResponseEntity<>("Hello, World!", HttpStatus.OK);
     }
 	
-	@GetMapping("/get")
 	public ResponseEntity<String> getUserList() {
 	    return new ResponseEntity<>("Success", HttpStatus.OK);
 	    
