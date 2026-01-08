@@ -11,18 +11,18 @@ docker info                 ## Docker system info
 
 
 ## Docker Images
-docker search imageName    ## search docker image in docker hub
-docker images              ## List images
-docker image ls            ## Same as above
+docker search imageName    # search docker image in docker hub
+docker images              # List images
+docker image ls            # Same as above
 docker pull nginx          # Download image
 docker build -t app .      # Build image from Dockerfile
 docker tag app app:v1      # Tag image
-docker rmi app              # Remove image
+docker rmi app             # Remove image
 docker rmi -f app          # Force remove image
-docker image prune          # Remove unused images
+docker image prune         # Remove unused images
 
 
-#Docker Containers
+## Docker Containers
 docker ps                  # Running containers
 docker ps -a               # All containers
 docker run app              # Run container
@@ -42,45 +42,45 @@ docker exec -it myapp sh      # Enter container
 docker exec -it myapp bash    # Bash shell
 docker inspect myapp          # Container details
 
-# remove file from jdk tmp
+##  remove file from jdk tmp
 docker exec 683bc8ac6c08 rm /tmp/filename.txt
 
-#command to jdk file
+## command to jdk file
 docker exec 683bc8ac6c08 ls -a
 
-# inside temp file jdk
+## inside temp file jdk
 docker exec 683bc8ac6c08 ls /tmp
-# command to copy jar file in docker
+## command to copy jar file in docker
 docker cp target/docker-1.jar 683bc8ac6c08:/tmp
 
-# commit
+## commit
 docker commit 683bc8ac6c08 sunil-app/docker-demo-3.5.9.jar:v1
 
-# commit file configuration for windows
+## commit file configuration for windows
 docker commit --change "CMD [\"java\",\"-jar\",\"/tmp/docker-1.jar\"]" musing_ishizaka sunil-app/docker:v2
 docker commit --change "CMD [\"java\",\"-jar\",\"/tmp/docker-demo-3.5.9.jar\"]" priceless_albattani sunil-app/docker:v2
 
-# run container with application
+## run container with application
 docker run -p 8080:8080 sunil-app/docker:v2
 
-# to build dockerfile of spring boot app
+## to build dockerfile of spring boot app
 docker build -t sunil-app/docker:v5 .
 
 
 
 
-# Steps to add Docker in Springboot app
-1. Install Docker desktop application
-2. Pull openjdk image form docker hub using command
+## Steps to add Docker in Springboot app
+1.  Install Docker desktop application
+2.  Pull openjdk image form docker hub using command
 	-docker pull openjdk:26-ea-29
-3. Run command -> docker Images
-4. Run images  -> docker run -it <image name>
-5. /exit from jshell
-6. To see container -> docker ps -a
-7. Start Container -> docker start <container name>
-8. Make Spring Boot app
-9. Make a Jar file of spring boot <Maven>
-10.Copy the jar and paste in container tmp directory using command
+3.  Run command -> docker Images
+4.  Run images  -> docker run -it <image name>
+5.  /exit from jshell
+6.  To see container -> docker ps -a
+7.  Start Container -> docker start <container name>
+8.  Make Spring Boot app
+9.  Make a Jar file of spring boot <Maven>
+10. Copy the jar and paste in container tmp directory using command
 	docker cp target/docker-1.jar musing_ishizaka:/tmp  
 11. commit and make image  using this command
 	docker commit --change "CMD [\"java\",\"-jar\",\"/tmp/docker-1.jar\"]" musing_ishizaka sunil-app/docker:v2   for windows
