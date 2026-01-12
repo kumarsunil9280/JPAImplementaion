@@ -10,18 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/")
 public class HomeController {
-	
-	@GetMapping("/hello")
+
+    @GetMapping("/hello")
     public ResponseEntity<String> sayHello() {
         return new ResponseEntity<>("Hello, World!", HttpStatus.OK);
     }
-	
-	@GetMapping("/getUser")
-	public ResponseEntity<String> getUserList() {
-	    return new ResponseEntity<>("Success", HttpStatus.OK);
-	    
-	    
-	}
+
+    @GetMapping("/get")
+    public ResponseEntity<String> getUserList() {
+        return new ResponseEntity<>("Success", HttpStatus.OK);
+
+
+    }
 
 	
 
