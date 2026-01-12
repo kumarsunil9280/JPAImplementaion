@@ -6,6 +6,9 @@ import java.util.Optional;
 import com.example.docker.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.example.docker.dao.UserDao;
@@ -86,7 +89,13 @@ public class UserService {
 
     @Cacheable(value = "users", key = "#id")
     public Optional<Users> getUserById(Long id) {
+    	System.out.println("DB Called");
         return userRepository.findById(id);
     }
+
+	public Page<Users> getPaginatedUser(Integer page, Integer size) {
+		Pageable pageable = PageRequest.of(page, size);
+	    return userRepository.findAll(pageable);
+	}
 
 }
