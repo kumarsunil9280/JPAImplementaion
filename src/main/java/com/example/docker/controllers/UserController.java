@@ -40,24 +40,27 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
-    // Pagination
-    @GetMapping("/getPaginatedUser")
-    public Page<Users> getUsers(
-            @RequestParam(defaultValue = "0") Integer page,
-            @RequestParam(defaultValue = "5") Integer size) {
-        return userService.getPaginatedUser(page, size);
-    }
+    
     @GetMapping("/getUser")
     public ResponseEntity<List<Users>> getUser() {
         List<Users> response = userService.getUserList();
         return ResponseEntity.ok().body(response);
     }
     
+    //Caching Technique
     @GetMapping("/getUserById/{id}")
     public ResponseEntity<Optional<Users>> getUserById(@PathVariable Long id) {
         Optional<Users> response = userService.getUserById(id);
         return ResponseEntity.ok(response);
     }
 
+    
+ // Pagination
+    @GetMapping("/getPaginatedUser")
+    public Page<Users> getUsers(
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "5") Integer size) {
+        return userService.getPaginatedUser(page, size);
+    }
 
 }

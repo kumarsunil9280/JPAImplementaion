@@ -10,10 +10,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.example.docker.dao.AuthUserRepository;
 import com.example.docker.dao.UserDao;
+import com.example.docker.dto.AuthRequest;
 import com.example.docker.dto.ResponseDTO;
 import com.example.docker.dto.UserDTO;
+import com.example.docker.entity.UserAuth;
 import com.example.docker.entity.Users;
 
 
@@ -23,7 +28,14 @@ public class UserService {
     UserDao userDao;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private AuthUserRepository authUserRepository ;
+
 
     public ResponseDTO saveUser(UserDTO userDto) {
 
@@ -96,6 +108,40 @@ public class UserService {
 	public Page<Users> getPaginatedUser(Integer page, Integer size) {
 		Pageable pageable = PageRequest.of(page, size);
 	    return userRepository.findAll(pageable);
+	}
+
+	
+	public ResponseDTO saveAuthUser(UserDTO userDto) {
+		 ResponseDTO dto = new ResponseDTO();
+
+		 	UserAuth user = new UserAuth();
+	       
+	        user.setUsername(userDto.getName());
+	        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+	        Long userId = userDao.saveAuthUser(user);
+
+	        if (userId != null) {
+	            dto.setId(userId);
+	            dto.setMsg("Successfully Saved!");
+	        } else {
+	            dto.setId(null);
+	            dto.setMsg("Error While Saving");
+	        }
+
+	        return dto;
+	}
+
+	public List<UserAuth> getAuthUser() {
+		 return authUserRepository.findAll( Sort.by(Sort.Order.asc("id")));
+	}
+
+	public Boolean saveAuthUsers(AuthRequest request) {
+		UserAuth user = new UserAuth();
+	       
+        user.setUsername(request.getUsername());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        authUserRepository.save(user);
+		return true;
 	}
 
 }

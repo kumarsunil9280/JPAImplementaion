@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.example.docker.entity.UserAuth;
 import com.example.docker.entity.Users;
 
 import jakarta.persistence.EntityManager;
@@ -20,6 +21,10 @@ public class UserDao {
 
     @Autowired
     UserRepository userRepository ;
+    
+    @Autowired
+    AuthUserRepository authUserRepository ;
+
 
 
     // Save Single User
@@ -42,5 +47,11 @@ public class UserDao {
         }
         return ids;
     }
+
+    @Transactional
+	public Long saveAuthUser(UserAuth user) {
+    	authUserRepository.save(user);
+        return user.getUserAuthId();
+	}
 
 }
