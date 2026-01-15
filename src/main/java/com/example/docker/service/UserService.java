@@ -132,7 +132,7 @@ public class UserService {
 	}
 
 	public List<UserAuth> getAuthUser() {
-		 return authUserRepository.findAll( Sort.by(Sort.Order.asc("id")));
+		 return authUserRepository.findAll();
 	}
 
 	public Boolean saveAuthUsers(AuthRequest request) {
