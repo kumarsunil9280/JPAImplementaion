@@ -47,6 +47,12 @@ public class UserController {
         return ResponseEntity.ok().body(response);
     }
     
+    @GetMapping("/getUserDTO")
+    public ResponseEntity<List<UserDTO>> getUserDTO() {
+        List<UserDTO> response = userService.getUserDTO();
+        return ResponseEntity.ok().body(response);
+    }
+    
     //Caching Technique
     @GetMapping("/getUserById/{id}")
     public ResponseEntity<Optional<Users>> getUserById(@PathVariable Long id) {

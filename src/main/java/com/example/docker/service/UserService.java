@@ -2,6 +2,7 @@ package com.example.docker.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.example.docker.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -143,5 +144,13 @@ public class UserService {
         authUserRepository.save(user);
 		return true;
 	}
+
+	public List<UserDTO> getUserDTO() {
+		return userRepository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
+	}
+	 private UserDTO convertToDTO(Users user) {
+		 UserDTO userDto = new UserDTO();
+		 return userDto;
+	 }
 
 }
