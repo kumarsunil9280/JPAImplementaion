@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.docker.dao.AuthUserRepository;
-import com.example.docker.dao.UserRepository;
 import com.example.docker.entity.UserAuth;
 
 
