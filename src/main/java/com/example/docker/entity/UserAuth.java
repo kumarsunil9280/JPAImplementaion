@@ -16,7 +16,7 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 
-@JsonPropertyOrder({ "user_auth_id", "user_name", "password", "createdAt", "updatedAt" })
+@JsonPropertyOrder({ "userAuthId", "username", "password", "createdAt", "updatedAt" })
 @Entity
 @Table(name = "user_auth",schema = "audit")
 public class UserAuth {

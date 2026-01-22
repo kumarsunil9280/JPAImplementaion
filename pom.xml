@@ -59,6 +59,7 @@
 			<artifactId>spring-boot-starter-webmvc-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 		<!--JWT Spring Caching Start -->
 		<dependency>
     		<groupId>org.springframework.boot</groupId>
@@ -94,10 +95,20 @@
 		</dependency>
 		<!--JWT Token End -->
 		
+		<!--actuator start-->
 		<dependency>
     		<groupId>org.springframework.boot</groupId>
     		<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+		<!--actuator end-->
+		
+		
+		<!--validation start -->
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+   			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<!--validation end -->
 
 	</dependencies>
 

@@ -50,8 +50,7 @@ public class AuthUserController {
 	    
 	    @PostMapping("/login")
 	    public String login(@RequestBody AuthRequest request) {
-	    	// Boolean response = userService.saveAuthUsers(request);
-	    	 
+	  
 	        authenticationManager.authenticate(
 	            new UsernamePasswordAuthenticationToken(
 	                request.getUsername(), request.getPassword())

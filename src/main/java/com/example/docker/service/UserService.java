@@ -38,10 +38,10 @@ public class UserService {
     private AuthUserRepository authUserRepository ;
 
 
+    //Save User Data
     public ResponseDTO saveUser(UserDTO userDto) {
 
-
-        ResponseDTO dto = new ResponseDTO();
+    	ResponseDTO dto = new ResponseDTO();
 
         Users user = new Users();
         user.setEmail(userDto.getEmail());
@@ -60,6 +60,7 @@ public class UserService {
         return dto;
     }
 
+    //Save Bulk User Data
     public List<ResponseDTO> saveBulkUser(List<UserDTO> userDto) {
         var userList = userDto.stream()
                 .map(dto -> {
@@ -94,33 +95,34 @@ public class UserService {
         return respDTOList;
     }
 
+    //Get All User List
     public List<Users> getUserList() {
         return userRepository.findAll( Sort.by(
                 Sort.Order.asc("id")
         ));
     }
 
+    //Cache use based on id
     @Cacheable(value = "users", key = "#id")
     public Optional<Users> getUserById(Long id) {
     	System.out.println("DB Called");
         return userRepository.findById(id);
     }
 
+    // Get Paginated User based data
 	public Page<Users> getPaginatedUser(Integer page, Integer size) {
 		Pageable pageable = PageRequest.of(page, size);
 	    return userRepository.findAll(pageable);
 	}
 
-	
+	// Save Auth User
 	public ResponseDTO saveAuthUser(UserDTO userDto) {
 		 ResponseDTO dto = new ResponseDTO();
 
 		 	UserAuth user = new UserAuth();
-	       
 	        user.setUsername(userDto.getName());
 	        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 	        Long userId = userDao.saveAuthUser(user);
-
 	        if (userId != null) {
 	            dto.setId(userId);
 	            dto.setMsg("Successfully Saved!");
@@ -128,14 +130,15 @@ public class UserService {
 	            dto.setId(null);
 	            dto.setMsg("Error While Saving");
 	        }
-
 	        return dto;
 	}
 
+	// get all Auth user
 	public List<UserAuth> getAuthUser() {
 		 return authUserRepository.findAll();
 	}
 
+	
 	public Boolean saveAuthUsers(AuthRequest request) {
 		UserAuth user = new UserAuth();
 	       
@@ -145,9 +148,12 @@ public class UserService {
 		return true;
 	}
 
+	
 	public List<UserDTO> getUserDTO() {
 		return userRepository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
 	}
+	
+	
 	 private UserDTO convertToDTO(Users user) {
 		 UserDTO userDto = new UserDTO();
 		 return userDto;
